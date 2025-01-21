@@ -2,7 +2,7 @@ import requests
 from flask import Flask
 app = Flask(__name__)
 
-API_KEY = '28cac5439407194a409a227079e0c106' # OpenWeather API Key
+API_KEY = '<key>' # OpenWeather API Key
 API_URL = 'http://api.openweathermap.org/data/2.5/weather?zip={},us&mode=json&units=imperial&appid={}'
 
 def query_api(zip):
