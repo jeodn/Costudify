@@ -11,6 +11,8 @@ application = app
 # create a list of dicts from a CSV
 presidents_list = convert_to_dict("presidents.csv")
 
+test_list = [{'Name': 'Josh', 'Year': 1}, {'Name': 'Nate', 'Year': 2}]
+
 # create a list of tuples in which the first item is the number
 # (Presidency) and the second item is the name (President)
 pairs_list = []
@@ -35,7 +37,19 @@ def detail(num):
         return f"<h1>Invalid value for Presidency: {num}</h1>"
     # a little bonus function, imported on line 2 above
     ord = make_ordinal( int(num) )
-    return render_template('president.html', pres=pres_dict, ord=ord, the_title=pres_dict['President'])
+    return render_template('president.html', pres=pres_dict, ord=ord, 
+                           the_title=pres_dict['President'])
+
+@app.route('/student/<num>')
+def student_bio(num):
+    try:
+        student_dict = test_list[int(num) - 1]
+    except:
+        return f"<h1>Invalid value for Presidency: {num}</h1>"
+    # a little bonus function, imported on line 2 above
+    ord = make_ordinal( int(num) )
+    return render_template('student.html', stu=student_dict, ord=ord, 
+                           the_title=student_dict['Name'])
 
 
 if __name__ == '__main__':
