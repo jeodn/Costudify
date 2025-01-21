@@ -1,5 +1,5 @@
 # Costudify
-Improving on deltahacks submission
-# Technologies 
-Backend: Flask
-Everything else: will figure out as go along
+## What is this
+Improving on Deltahacks submission
+## Technologies 
+Flask
