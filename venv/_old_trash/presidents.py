@@ -10,7 +10,7 @@ application = app
 
 # create a list of dicts from a CSV
 presidents_list = convert_to_dict("presidents.csv")
-
+student_list = convert_to_dict("students.csv")
 test_list = [{'Name': 'Josh', 'Year': 1}, {'Name': 'Nate', 'Year': 2}]
 
 # create a list of tuples in which the first item is the number

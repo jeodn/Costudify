@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>List of all my posts</h1>
+
+<p>Click any post.</p>
+
+<!-- pairs is a list that must be sent here by a route function
+
+     The list will contain 45 pairs: a presidency number, and a
+     president's name -->
+
+    <ul>
+    {% for pair in pairs %}
+        <li><a href="{{ url_for( 'detail', num=pair[0] ) }}">{{ pair[1] }}</a></li>
+        {{ pair[2] }}
+    {% endfor %}
+    </ul>
+
+{% endblock %}
