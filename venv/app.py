@@ -71,26 +71,6 @@ class Post:
         self.description = description
 
 
-# create a list of dicts from a CSV
-posts_list = convert_to_dict("posts.csv")
-
-# create a list of tuples in which the first item is the number
-# (Presidency) and the second item is the name (President)
-# Constants
-KEY_ID = 0
-KEY_TITLE = 1
-KEY_DESCRIPTION = 2
-
-pairs_list = []
-for p in posts_list:
-    pairs_list.append( (p['ID'], p['Title'], p['Description']) )
-
-
-@app.route('/')
-def index():
-    return render_template('index.html', posts=posts_list, the_title="Main Index")
-
-
 def id_to_post_title(id: int, post_pairs: list[tuple]):
     """
     Get post title by ID. ID_KEY is position of id in tuple.
@@ -100,17 +80,37 @@ def id_to_post_title(id: int, post_pairs: list[tuple]):
             return pair
 
 
+# create a list of dicts from a CSV. Or, create a list of Posts.
+#posts_list = convert_to_dict("posts.csv")
+def get_posts(post_file: str):
+    """
+    Return a list of Post objects with information from posts.csv.
+    """
+    post_dicts = convert_to_dict("posts.csv") # list of dictionaries
+    out_list = []
+
+    for p in post_dicts:
+        out_list.append( Post(p['ID'], p['Date'], p['User'], p['Platform'], 
+                        p['Course'], p['URL'], p['Title'], p['Description']) )
+
+    return out_list
+
+posts_list = get_posts('posts.csv')
+
+
+@app.route('/')
+def index():
+    return render_template('index.html', posts=posts_list, the_title="Main Index")
+
+
 @app.route('/detail/<num>')
 def detail(num):
     try:
-        post_dict = posts_list[int(num) - 1]
+        post = posts_list[int(num) - 1]
     except:
         return f"<h1>Invalid value for post: {num}</h1>"
-    post_tuple = id_to_post_title(num, pairs_list)
-    desc = post_tuple[KEY_DESCRIPTION]
-    title = post_tuple[KEY_TITLE]
 
-    return render_template('post.html', p=post_dict, the_title=f"{post_dict['User']}: {post_dict['Title']}")
+    return render_template('post.html', post=post, the_title=f"{post.user}: {post.title}")
 
 if __name__ == "__main__":
     app.run(debug=True)
