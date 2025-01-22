@@ -32,7 +32,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 {% for post in posts %}
   <!-- Blog entry -->
   <div class="w3-card-4 w3-margin w3-white">
-    <img src="/static/PLACEHOLDER.jpg" alt="Nature" style="width:10%">
+    <img src="{{ post.get_app_icon() }}" alt="Nature" style="width:10%; margin-left:10px; margin-top: 10px;">
     <div class="w3-container">
       <h3><b>{{ post.title }}</b></h3>
       <h5>{{ post.course }} on {{ post.platform }}, <span class="w3-opacity">{{ post.date }}</span></h5>
@@ -64,8 +64,8 @@ and is wrapped around the whole page content, except for the footer in this exam
   <div class="w3-card w3-margin w3-margin-top">
   <img src="/static/PLACEHOLDER.jpg" alt="ok" style="width:100%">
     <div class="w3-container w3-white">
-      <h4><b>My Name</b></h4>
-      <p>Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with you.</p>
+      <h4><b>This is a cat.</b></h4>
+      <p>Look at it, for it looks at you.</p>
     </div>
   </div><hr>
   

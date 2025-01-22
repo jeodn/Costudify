@@ -70,14 +70,15 @@ class Post:
         self.title = title
         self.description = description
 
-
-def id_to_post_title(id: int, post_pairs: list[tuple]):
-    """
-    Get post title by ID. ID_KEY is position of id in tuple.
-    """
-    for pair in post_pairs:
-        if pair[KEY_ID] == id:
-            return pair
+    def get_app_icon(self):
+        """
+        Return filepath to icon of Post's platform.
+        """
+        app_icons = {"WeChat": "/static/wechat.png",
+                     "Instagram": "/static/instagram.png"
+                     }
+        
+        return app_icons[self.platform]
 
 
 # create a list of dicts from a CSV. Or, create a list of Posts.
@@ -96,11 +97,12 @@ def get_posts(post_file: str):
     return out_list
 
 posts_list = get_posts('posts.csv')
+print([post.title for post in posts_list])
 
 
 @app.route('/')
 def index():
-    return render_template('index.html', posts=posts_list, the_title="Main Index")
+    return render_template('index.html', posts=posts_list, the_title="Index")
 
 
 @app.route('/detail/<num>')
